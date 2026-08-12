@@ -1,0 +1,638 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MSc Biopharmaceutical Development &amp; Commercialization | PolyU</title>
+<meta name="description" content="Three Master of Science routes in Biopharmaceutical Development and Commercialization at PolyU — Hong Kong, the NTU Singapore dual award, and the Zhongshan internship stream." />
+<link rel="stylesheet" href="assets/theme.css" />
+<style>
+  /* ============================================================
+     PHOTO STAGE — she is the hero; the lab is her real background
+     ============================================================ */
+  .stage{
+    position:relative;overflow:hidden;background:#fff;
+    min-height:min(calc(100vh - 74px),900px);
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+
+  /* --- the photograph, on a perspective stage ---
+     Width-bound rather than height-bound, so she sits back in the frame
+     instead of filling it; anchored to the top so her head is never cropped,
+     and the lower edge is masked into white where the bench sits. */
+  .photo-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;perspective:1500px}
+  .photo-inner{
+    position:absolute;right:-2%;left:auto;top:0;
+    width:72%;min-width:0;                 /* narrower than the stage → she sits back */
+    aspect-ratio:1456/816;
+    transform-origin:top right;
+    /* Two masks intersected: fade out at the bottom AND at the left edge, so
+       the photo dissolves into the page instead of showing a cut line.
+       mask-composite must be intersect — the default (add) would union them
+       and produce no fade at all. */
+    -webkit-mask-image:
+      linear-gradient(180deg,#000 58%,rgba(0,0,0,0) 100%),
+      linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 14%,#000 28%);
+    -webkit-mask-composite:source-in;
+    mask-image:
+      linear-gradient(180deg,#000 58%,rgba(0,0,0,0) 100%),
+      linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 14%,#000 28%);
+    mask-composite:intersect;
+    will-change:transform;
+  }
+  .photo{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+
+  /* legibility scrims — light on the left where the copy sits */
+  .scrim-x{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(96deg,
+      rgba(255,255,255,.97) 0%, rgba(255,255,255,.92) 22%,
+      rgba(255,255,255,.66) 40%, rgba(255,255,255,.20) 56%,
+      rgba(255,255,255,0) 70%);
+  }
+  .scrim-y{
+    position:absolute;left:0;right:0;bottom:0;height:52%;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.62) 48%,rgba(255,255,255,.94) 88%);
+  }
+  /* faint colour wash to tie the photo to the brand palette */
+  .tint{
+    position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply;opacity:.30;
+    background:radial-gradient(60% 70% at 12% 25%,rgba(103,232,249,.40),transparent 65%),
+               radial-gradient(55% 65% at 88% 78%,rgba(124,108,240,.32),transparent 62%);
+  }
+
+  /* --- headline, left of frame --- */
+  .stage-inner{position:relative;z-index:4;width:100%}
+  .stage-head{max-width:670px;padding:48px 0 0}
+  .stage-head h1{
+    font-size:clamp(1.8rem,3.7vw,2.85rem);font-weight:800;letter-spacing:-.03em;
+    animation:riseUp .9s cubic-bezier(.2,.8,.3,1) both;
+  }
+  .stage-head h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg,var(--red) 5%,var(--violet) 52%,#0891B2 95%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .stage-head p{
+    margin-top:16px;max-width:470px;font-size:1.04rem;color:#3F4854;
+    animation:riseUp .9s cubic-bezier(.2,.8,.3,1) .12s both;
+  }
+  .stage-head .kicker{animation:riseUp .9s cubic-bezier(.2,.8,.3,1) both}
+  @keyframes riseUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+  /* --- the bench + the three programmes --- */
+  .bench-zone{position:relative;z-index:4;padding-bottom:34px}
+  .bench{
+    position:absolute;left:-6%;right:-6%;bottom:0;height:96px;z-index:-1;
+    background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(226,238,250,.85));
+    border-top:1.5px solid rgba(255,255,255,.95);
+    backdrop-filter:blur(6px);
+  }
+  .bench::before{
+    content:"";position:absolute;left:0;right:0;top:-1.5px;height:3px;
+    background:linear-gradient(90deg,transparent,rgba(103,232,249,.85),rgba(124,108,240,.6),transparent);
+    box-shadow:0 0 18px rgba(103,232,249,.6);
+  }
+
+  .rail{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .prog{
+    position:relative;display:block;padding:20px 22px 18px;border-radius:18px;
+    background:rgba(255,255,255,.80);backdrop-filter:blur(18px) saturate(160%);
+    border:1.5px solid rgba(255,255,255,.9);
+    box-shadow:0 24px 50px -28px rgba(20,45,85,.6);
+    transition:transform .38s cubic-bezier(.2,.8,.3,1),box-shadow .38s,border-color .38s,background .38s;
+    overflow:hidden;
+  }
+  .prog::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--accent);opacity:.95}
+  .prog::after{
+    content:"";position:absolute;inset:0;opacity:0;transition:opacity .38s;
+    background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--accent) 15%,transparent),transparent 70%);
+  }
+  .prog:hover{transform:translateY(-12px);background:rgba(255,255,255,.97);border-color:var(--accent);box-shadow:0 40px 64px -30px rgba(20,45,85,.65)}
+  .prog:hover::after{opacity:1}
+  .prog:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+  .prog .no{position:absolute;right:18px;top:16px;font-family:var(--head);font-weight:800;font-size:2.2rem;color:var(--accent);opacity:.13;line-height:1}
+  .prog h3{font-size:1.02rem;margin:11px 0 7px;line-height:1.3;position:relative;z-index:2}
+  .prog p{font-size:.86rem;color:var(--body);line-height:1.55;position:relative;z-index:2}
+  .prog .foot{margin-top:15px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;position:relative;z-index:2}
+  .prog .meta{display:flex;gap:7px;flex-wrap:wrap;font-size:.72rem;color:var(--muted);font-weight:600}
+  .prog .meta span{background:rgba(246,248,252,.9);border:1px solid var(--line);padding:3px 9px;border-radius:100px}
+  .prog .go{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-family:var(--head);font-weight:700;font-size:.82rem;color:var(--accent)}
+  .prog .go svg{width:15px;height:15px;transition:transform .3s}
+  .prog:hover .go svg{transform:translateX(5px)}
+
+  .hint{margin:14px 0 0;font-size:.8rem;color:#6C7684;letter-spacing:.04em}
+  .hint b{color:var(--red);font-weight:600}
+
+  /* ---------- below the fold ---------- */
+  .band{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cmp{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .cmp th,.cmp td{padding:17px 20px;text-align:left;font-size:.94rem;border-bottom:1px solid var(--line)}
+  .cmp thead th{background:var(--ink);color:#fff;font-family:var(--head);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;border-bottom:none}
+  .cmp tbody tr:last-child td{border-bottom:none}
+  .cmp tbody tr:hover td{background:var(--bg-tint)}
+  .cmp td:first-child,.cmp th:first-child{font-family:var(--head);font-weight:600;color:var(--ink)}
+  .cmp-scroll{overflow-x:auto;border-radius:var(--radius)}
+
+  /* ---------- curriculum comparison ---------- */
+  .curr-head{margin:64px 0 22px;max-width:700px}
+  .curr-head h3{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-top:10px}
+  .curr-head p{margin-top:12px;color:var(--body);font-size:1rem}
+
+  .spine{
+    background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);
+    border-radius:var(--radius);padding:24px 26px;margin-bottom:24px;
+    display:grid;grid-template-columns:190px 1fr;gap:24px;align-items:start;
+  }
+  .spine-label b{display:block;font-family:var(--head);font-size:1rem;color:var(--ink);line-height:1.25}
+  .spine-label span{display:block;margin-top:5px;font-size:.8rem;color:var(--muted);line-height:1.4}
+  .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .chip{background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:11px 14px;transition:.22s}
+  .chip:hover{border-color:var(--red);background:#fff}
+  .chip b{display:block;font-family:var(--head);font-size:.69rem;letter-spacing:.07em;color:var(--red);margin-bottom:3px}
+  .chip span{font-size:.81rem;line-height:1.4;color:var(--ink)}
+  .chip i{display:block;margin-top:6px;font-style:normal;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+  .curr{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .currcol{
+    background:#fff;border:1px solid var(--line);border-top:4px solid var(--c);
+    border-radius:var(--radius);padding:24px 22px 20px;display:flex;flex-direction:column;
+    transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .35s;
+  }
+  .currcol:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .currcol .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .currcol .cr{font-family:var(--head);font-weight:800;font-size:.76rem;color:var(--c);letter-spacing:.04em;white-space:nowrap}
+  .currcol h4{font-size:1rem;margin:12px 0 4px;line-height:1.3}
+
+  .blk{position:relative;padding:15px 0 15px 24px;border-top:1px solid var(--line)}
+  .blk:first-of-type{border-top:none;padding-top:16px}
+  .blk::before{content:"";position:absolute;left:0;top:21px;width:9px;height:9px;border-radius:50%;background:var(--c);z-index:2}
+  .blk::after{content:"";position:absolute;left:4px;top:30px;bottom:-15px;width:1px;background:var(--line)}
+  .blk:last-of-type::after{display:none}
+  .blk .tag{display:block;font-family:var(--head);font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--c);margin-bottom:7px}
+  .blk .muted{font-size:.82rem;color:var(--muted);line-height:1.45}
+
+  .subj{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .subj li{font-size:.82rem;line-height:1.4;color:var(--body);display:flex;gap:9px;align-items:baseline}
+  .subj li code{font-family:var(--head);font-weight:700;font-size:.7rem;color:var(--ink);flex:none;min-width:62px;letter-spacing:.01em}
+  .subj li .sub{display:block;margin-top:4px;font-size:.75rem;line-height:1.45;color:var(--muted)}
+  .subj li .sub b{color:var(--c);font-weight:700}
+
+  .opt{background:var(--bg-soft);border:1px dashed #CBD5E4;border-radius:10px;padding:10px 12px;margin-top:9px}
+  .opt em{display:block;font-style:normal;font-family:var(--head);font-weight:700;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--c);margin-bottom:6px}
+  .opt .subj li{font-size:.79rem}
+  .optinfo{
+    margin-top:9px;padding-top:9px;border-top:1px solid rgba(203,213,228,.7);
+    font-size:.77rem;line-height:1.55;color:var(--body);
+  }
+  .optinfo b{color:var(--ink);font-weight:600}
+  /* highlighted callout inside an option box */
+  .optinfo.phd{
+    border-top:none;margin-top:9px;padding:10px 12px;border-radius:9px;
+    background:color-mix(in srgb,var(--c) 8%,#fff);
+    border:1px solid color-mix(in srgb,var(--c) 26%,transparent);
+  }
+  .optinfo.phd b{color:var(--c)}
+  .optinfo.phd .lead-in{
+    display:block;font-family:var(--head);font-weight:700;font-size:.72rem;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--c);margin-bottom:5px;
+  }
+
+  .track{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .track span{font-size:.73rem;font-weight:600;padding:4px 10px;border-radius:100px;background:color-mix(in srgb,var(--c) 10%,#fff);border:1px solid color-mix(in srgb,var(--c) 30%,transparent);color:var(--c)}
+
+  .src-note{
+    margin-top:24px;font-size:.85rem;color:var(--muted);line-height:1.6;
+    background:#fff;border:1px solid var(--line);border-left:3px solid var(--muted);
+    border-radius:10px;padding:15px 18px;
+  }
+  .src-note a{color:var(--red);font-weight:600;border-bottom:1px solid rgba(160,35,55,.3)}
+  .src-note a:hover{border-bottom-color:var(--red)}
+
+  @media(max-width:980px){
+    .curr{grid-template-columns:1fr}
+    .spine{grid-template-columns:1fr;gap:16px}
+    .chips{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:560px){ .chips{grid-template-columns:1fr} }
+
+  /* On narrow screens the stage grows tall as the cards stack, so the photo
+     stops being a full background and becomes a banner band at the top,
+     with the copy and cards flowing beneath it on white. */
+  @media(max-width:900px){
+    .stage{min-height:0;background:#fff;padding-bottom:12px;display:block}
+    .photo-wrap{inset:0 0 auto 0;height:54vh}
+    .photo-inner{width:auto;min-width:0;height:100%;right:-29%;left:auto;top:0}  /* keeps her face centred */
+    .tint{height:54vh;opacity:.22}
+    .scrim-x{
+      height:54vh;
+      background:linear-gradient(180deg,
+        rgba(255,255,255,.42) 0%, rgba(255,255,255,.10) 26%,
+        rgba(255,255,255,.55) 74%, rgba(255,255,255,.96) 94%, #fff 100%);
+    }
+    .scrim-y{display:none}
+    .stage-head{max-width:none;padding-top:calc(54vh + 20px)}
+    .stage-head p{max-width:none}
+    .bench-zone{padding-top:26px}
+    .bench{display:none}
+    .rail{grid-template-columns:1fr;gap:14px}
+  }
+  @media(max-width:560px){
+    .photo-wrap{height:46vh}
+    .tint,.scrim-x{height:46vh}
+    .stage-head{padding-top:calc(46vh + 18px)}
+    .photo-inner{right:-31%}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <a href="https://www.polyu.edu.hk/" target="_blank" rel="noopener"
+         aria-label="The Hong Kong Polytechnic University homepage">
+        <img class="logo" src="assets/polyu-logo.png"
+             alt="The Hong Kong Polytechnic University 香港理工大學"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <span class="logo-fb" style="display:none">The Hong Kong<br>Polytechnic University</span>
+      </a>
+      <span class="rule-v"></span>
+      <a class="ls-link" href="https://www.polyu.edu.hk/ls/" target="_blank" rel="noopener"
+         aria-label="Department of Life Sciences homepage">
+        <img class="logo-ls" src="assets/LS.png" alt="Department of Life Sciences 生命科學系"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <span class="logo-fb" style="display:none">Department of<br>Life Sciences</span>
+      </a>
+    </div>
+    <button class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links">
+      <a href="#programmes">Programmes</a>
+      <a href="#compare">Compare</a>
+      <a href="#dates">Key Dates</a>
+      <a href="#contact">Contact</a>
+      <div class="apply-wrap">
+        <button class="apply-btn" aria-haspopup="true" aria-expanded="false">Apply
+          <svg class="caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="apply-menu">
+          <div class="hd">Choose a programme to apply for</div>
+          <a href="https://www.polyu.edu.hk/study/pg/tpg/2027/17004-mft-mpt" target="_blank" rel="noopener" style="--ac:#A02337">
+            <b>Hong Kong</b>
+            <span>The flagship one-year MSc, full-time or part-time.</span>
+            <span class="code">17004 · MFT / MPT</span>
+          </a>
+          <a href="https://www.polyu.edu.hk/study/pg/tpg/2027/17004-mft-mpt" target="_blank" rel="noopener" style="--ac:#7C6CF0">
+            <b>Dual Award with NTU Singapore</b>
+            <span>Applied for under 17004 — state your interest in the dual degree during application.</span>
+            <span class="code">17004 · Dual degree stream</span>
+          </a>
+          <a href="https://www.polyu.edu.hk/study/pg/tpg/2027/17005" target="_blank" rel="noopener" style="--ac:#0891B2">
+            <b>Zhongshan internship</b>
+            <span>Internship in the Greater Bay Area via the PolyU-Zhongshan Institute.</span>
+            <span class="code">17005 · MFT</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= PHOTO STAGE ================= -->
+<section class="stage">
+  <div class="photo-wrap">
+    <div class="photo-inner par-photo" id="photoLayer">
+      <img class="photo" src="assets/scientist.png"
+           alt="A scientist in a lab coat standing in a bright research laboratory" />
+    </div>
+  </div>
+  <div class="tint"></div>
+  <div class="scrim-x"></div>
+  <div class="scrim-y"></div>
+
+  <div class="wrap stage-inner">
+    <div class="stage-head">
+      <span class="kicker">Taught Postgraduate · Entry September 2027</span>
+      <h1>Three Routes into<br><em>Biopharma and Biobusiness</em></h1>
+      <p>Master the science, business and regulation of getting a therapy from the bench to the patient — in Hong Kong, Singapore, or the Greater Bay Area.</p>
+    </div>
+  </div>
+
+  <div class="wrap stage-inner bench-zone">
+    <div class="bench" aria-hidden="true"></div>
+    <div class="rail">
+      <a class="prog rv" data-d="1" href="programs/standard.html" style="--accent:#A02337">
+        <span class="no">01</span>
+        <span class="pill pill-red">Hong Kong</span>
+        <h3>MSc in Biopharmaceutical Development &amp; Commercialization</h3>
+        <p>The flagship route — one year in Hong Kong, from biologics to market entry.</p>
+        <div class="foot">
+          <div class="meta"><span>1 yr FT</span><span>31 credits</span><span>Internship in HK</span></div>
+          <span class="go">Explore
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a class="prog rv" data-d="2" href="programs/dual-award.html" style="--accent:#7C6CF0">
+        <span class="no">02</span>
+        <span class="pill pill-violet">Dual Award · NTU</span>
+        <h3>Dual Degree with MSc in Biomedical Data Science</h3>
+        <p>Two universities, two master's degrees — Year 1 PolyU, Year 2 NTU Singapore.</p>
+        <div class="foot">
+          <div class="meta"><span>2 yr FT</span><span>61 credits</span><span>Internship/capstone in SG</span></div>
+          <span class="go">Explore
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a class="prog rv" data-d="3" href="programs/zhongshan.html" style="--accent:#0891B2">
+        <span class="no">03</span>
+        <span class="pill pill-cyan">Zhongshan · GBA</span>
+        <h3>With Internship at the PolyU-Zhongshan Institute</h3>
+        <p>The same degree, plus an industry placement in the Greater Bay Area.</p>
+        <div class="foot">
+          <div class="meta"><span>1 yr FT</span><span>31 credits</span><span>Internship in Zhongshan</span></div>
+          <span class="go">Explore
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section id="programmes">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Why this degree</span>
+      <h2>Science alone doesn't reach patients. <em>Strategy does.</em></h2>
+      <p>The curriculum integrates the scientific, business, regulatory and ethical dimensions of the biopharmaceutical landscape — so you can move a therapy from discovery all the way to approval and launch.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card rv" data-d="1"><div class="ico">🧬</div><h3>Cutting-edge therapeutics</h3><p>Biologics, protein engineering, and cell &amp; gene therapies — the modalities defining the next decade of medicine.</p></div>
+      <div class="card rv" data-d="2"><div class="ico">⚖️</div><h3>Regulatory expertise</h3><p>Clinical trials, drug approval pathways and the intellectual property strategy that protects an asset's value.</p></div>
+      <div class="card rv" data-d="3"><div class="ico">📈</div><h3>Commercial acumen</h3><p>Market entry, pricing and business development — how a therapy becomes a viable, fundable product.</p></div>
+      <div class="card rv" data-d="1"><div class="ico">🤝</div><h3>Interdisciplinary teams</h3><p>Work the way industry works: scientists, regulators, analysts and commercial leads solving problems together.</p></div>
+      <div class="card rv" data-d="2"><div class="ico">🌏</div><h3>Three geographies</h3><p>Hong Kong, Singapore and the Greater Bay Area — choose the market where you want to build your career.</p></div>
+      <div class="card rv" data-d="3"><div class="ico">🎓</div><h3>Led by practitioners</h3><p>Directed by Prof. Wong Tsun-ting, Clarence (PhD) within PolyU's Department of Life Sciences.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARE ================= -->
+<section id="compare" class="band">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Side by side</span>
+      <h2>Which route fits you?</h2>
+      <p>All three share the same core philosophy. They differ in length, location and what you walk away holding.</p>
+    </div>
+    <div class="cmp-scroll rv">
+      <table class="cmp">
+        <thead>
+          <tr><th>&nbsp;</th><th>Hong Kong</th><th>Dual Award (NTU)</th><th>Zhongshan</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Programme code</td><td>17004</td><td>17004 (Dual degree stream)</td><td>17005</td></tr>
+          <tr><td>Duration</td><td>1 yr FT / 2 yr PT</td><td>2 years full-time</td><td>1 year full-time</td></tr>
+          <tr><td>Credits</td><td>31</td><td>61</td><td>31</td></tr>
+          <tr><td>Tuition</td><td>HK$8,400 / credit</td><td>HK$176,400 + SGD 63,595</td><td>HK$8,900 / credit</td></tr>
+          <tr><td>Award</td><td>One MSc</td><td>Two MSc degrees</td><td>One MSc + internship</td></tr>
+          <tr><td>Where</td><td>Hong Kong</td><td>Hong Kong → Singapore</td><td>Hong Kong + Zhongshan</td></tr>
+          <tr>
+            <td>Details</td>
+            <td><a href="programs/standard.html" style="color:var(--red);font-weight:600">View →</a></td>
+            <td><a href="programs/dual-award.html" style="color:var(--violet);font-weight:600">View →</a></td>
+            <td><a href="programs/zhongshan.html" style="color:#0E7490;font-weight:600">View →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ============ CURRICULUM COMPARISON ============ -->
+    <div class="curr-head rv">
+      <span class="kicker">Curriculum</span>
+      <h3>What you actually study</h3>
+      <p>Seven subjects form a common spine across all three routes. Everything after that is where they diverge — what you specialise in, and where you do it.</p>
+    </div>
+
+    <div class="spine rv">
+      <div class="spine-label">
+        <b>The shared spine</b>
+        <span>Seven subjects taught on all three routes</span>
+      </div>
+      <div class="chips">
+        <div class="chip"><b>ABCT5T01</b><span>Academic Integrity and Ethics in Science</span><i>University requirement</i></div>
+        <div class="chip"><b>ABCT5103</b><span>Intellectual Property Strategy for Biotech Entrepreneurship</span></div>
+        <div class="chip"><b>ABCT5104</b><span>Regulatory Science for Biotech Products</span></div>
+        <div class="chip"><b>ABCT5105</b><span>Ethics and Management in Life Sciences</span></div>
+        <div class="chip"><b>ABCT5106</b><span>Technology Platforms in Drug Discovery</span></div>
+        <div class="chip"><b>ABCT5107</b><span>Advanced Therapeutic Products</span></div>
+        <div class="chip"><b>ABCT5108</b><span>Investment Financing and Risk Management in Biobusiness</span></div>
+      </div>
+    </div>
+
+    <div class="curr">
+      <!-- ---------- Hong Kong ---------- -->
+      <article class="currcol rv" data-d="1" style="--c:#A02337">
+        <div class="top"><span class="pill pill-red">Hong Kong</span><span class="cr">31 credits</span></div>
+        <h4>MSc BDC · 17004</h4>
+
+        <div class="blk">
+          <span class="tag">Foundation</span>
+          <p class="muted">The seven shared subjects above.</p>
+        </div>
+
+        <div class="blk">
+          <span class="tag">Plus on this route</span>
+          <ul class="subj">
+            <li><code>ABCT5101</code><span>Modern Approaches in Biopharmaceutical Development</span></li>
+            <li><code>ABCT5102</code><span>Pharmacology and Toxicology in Biotherapeutics</span></li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <span class="tag">Optional core · 6 credits</span>
+          <p class="muted">Choose one of two paths:</p>
+          <div class="opt">
+            <em>Path A · industry</em>
+            <ul class="subj">
+              <li><code>ABCT5110</code><span>Industrial Attachment (6)</span></li>
+            </ul>
+            <p class="optinfo">Roughly <b>400 hours</b> on placement. The department lists openings in a range of countries, and you may also source your own — either way, you <b>interview and secure the position yourself</b>.</p>
+          </div>
+          <div class="opt">
+            <em>Path B · research</em>
+            <ul class="subj">
+              <li><code>ABCT5113</code><span>Research Project (6)</span></li>
+            </ul>
+            <p class="optinfo">You <b>approach a PolyU professor</b> to supervise you, then spend <b>six months</b> on a hands-on research project in their group.</p>
+            <p class="optinfo phd">
+              <span class="lead-in">If you're aiming at a PhD</span>
+              Gives you <b>genuine research experience</b> to draw on in future applications. It is research training only — not a PhD placement, and no commitment from the supervisor beyond the project.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---------- Dual award ---------- -->
+      <article class="currcol rv" data-d="2" style="--c:#7C6CF0">
+        <div class="top"><span class="pill pill-violet">Dual Award</span><span class="cr">61 credits</span></div>
+        <h4>PolyU × NTU Singapore</h4>
+
+        <div class="blk">
+          <span class="tag">Year 1 · PolyU</span>
+          <p class="muted">The seven shared subjects, plus:</p>
+          <ul class="subj" style="margin-top:7px">
+            <li><code>ABCT5102</code><span>Pharmacology and Toxicology in Biotherapeutics</span></li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <span class="tag">Year 2 · NTU — Trimester 1</span>
+          <ul class="subj">
+            <li><code>BS6200</code><span>Essential Machine Learning for Biomedical Science</span></li>
+            <li><code>BS6201</code><span>Essential Programming for Biomedical Science</span></li>
+            <li><code>BS6202</code><span>Techniques in Biomedical Data Mining</span></li>
+            <li><code>BS6203</code><span>Story-telling with Graphics and Visualizations</span></li>
+            <li><code>BS6204</code><span>Deep Learning for Biomedical Science</span></li>
+            <li><code>BS6205</code><span>Essential Bio-statistics and Biomathematics</span></li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <span class="tag">Trimester 2 · pick a track</span>
+          <div class="track"><span>AI</span><span>Bioinformatics</span><span>Biotechnology</span></div>
+          <p class="muted" style="margin-top:8px">Three subjects from the chosen track (BS6206–BS6220).</p>
+        </div>
+
+        <div class="blk">
+          <span class="tag">Trimester 3 · practicum</span>
+          <ul class="subj">
+            <li><code>BS6211</code><span>Practicum</span></li>
+            <li><code>BS6222/23</code><span>Self-designed Practicum</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ---------- Zhongshan ---------- -->
+      <article class="currcol rv" data-d="3" style="--c:#0891B2">
+        <div class="top"><span class="pill pill-cyan">Zhongshan</span><span class="cr">31 credits</span></div>
+        <h4>MSc BDC · 17005</h4>
+
+        <div class="blk">
+          <span class="tag">Core · at PolyU Hong Kong</span>
+          <p class="muted">The seven shared subjects, plus:</p>
+          <ul class="subj" style="margin-top:7px">
+            <li><code>ABCT5101</code><span>Modern Approaches in Biopharmaceutical Development</span></li>
+          </ul>
+        </div>
+
+        <div class="blk">
+          <span class="tag">GBA specialisation · 9 credits</span>
+          <div class="opt">
+            <em>Internship · arranged for you</em>
+            <ul class="subj">
+              <li><code>ABCT5115P</code><span>Industrial Attachment (GBA)</span></li>
+            </ul>
+            <p class="optinfo"><b>400 hours</b> on placement — the same as the Hong Kong route, but <b>arranged by the PolyU-Zhongshan Technology and Innovation Research Institute</b>. Your internship is assigned to you, so there is no need to find one yourself.</p>
+          </div>
+          <div class="opt">
+            <em>Taught subject · in Zhongshan</em>
+            <ul class="subj">
+              <li><code>ABCT5102P</code><span>Pharmacology and Toxicology in Biotherapeutics</span></li>
+            </ul>
+            <p class="optinfo">Delivered <b>on Saturdays, in Zhongshan</b> — the Zhongshan counterpart of the Hong Kong route's ABCT5102.</p>
+          </div>
+          <p class="muted" style="margin-top:11px">Hosted inside the Cuiheng Group industrial ecosystem.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="src-note rv">
+      Subject lists follow the official curriculum pages for each programme
+      (<a href="https://www.polyu.edu.hk/ls/study/taught-postgraduate-programmes/master-of-science-in-biopharmaceutical-development-and-commercialization/curriculum/" target="_blank" rel="noopener">Hong Kong</a>,
+      <a href="https://www.polyu.edu.hk/ls/study/taught-postgraduate-programmes/master-of-science-in-biopharmaceutical-development-and-commercialization-dual-award/curriculum/" target="_blank" rel="noopener">Dual Award</a>,
+      <a href="https://www.polyu.edu.hk/ls/study/taught-postgraduate-programmes/master-of-science-in-biopharmaceutical-development-and-commercialization-zhongshan/curriculum/" target="_blank" rel="noopener">Zhongshan</a>).
+      Per-subject credit values are shown only where the curriculum pages publish them; totals are taken from the programme pages. Subject offerings are subject to change — confirm with the department before applying.
+    </p>
+  </div>
+</section>
+
+<!-- ================= DATES ================= -->
+<section id="dates">
+  <div class="wrap">
+    <div class="grid g2" style="align-items:center;gap:56px">
+      <div class="rv">
+        <span class="kicker">Admissions</span>
+        <h2 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Key dates for the <em style="font-style:normal;color:var(--red)">September 2027</em> intake</h2>
+        <p style="margin-top:16px">Applications are reviewed in two rounds and places fill quickly. Early applications are strongly encouraged across all three programmes.</p>
+        <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-top:32px">
+          <div class="stat"><b><span data-count="31">31</span></b><span>Credits (HK route)</span></div>
+          <div class="stat"><b><span data-count="3">3</span></b><span>Programme routes</span></div>
+        </div>
+      </div>
+      <div class="rv" data-d="2">
+        <div class="tl">
+          <div class="item"><span>Round 1</span><h4>Early Round closes — 20 October 2026</h4><p>Strongly recommended. Best availability and earliest decisions.</p></div>
+          <div class="item"><span>Round 2</span><h4>Main Round closes — 25 February 2027</h4><p>Remaining places are offered on a competitive, rolling basis.</p></div>
+          <div class="item"><span>Start</span><h4>Studies begin — September 2027</h4><p>Registration and orientation at PolyU, Hung Hom, Hong Kong.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <span class="kicker" style="color:#fff">Ready when you are</span>
+    <h2>Take biopharma from the bench to the market.</h2>
+    <p>Questions about entrance requirements, subjects or which route suits your background? The programme team is happy to help.</p>
+    <div class="btns">
+      <a class="btn btn-red" href="https://www.polyu.edu.hk/study/pg/tpg/2027/17004-mft-mpt" target="_blank" rel="noopener">Apply · Hong Kong &amp; Dual Award (17004)</a>
+      <a class="btn btn-glass" href="https://www.polyu.edu.hk/study/pg/tpg/2027/17005" target="_blank" rel="noopener">Apply · Zhongshan (17005)</a>
+      <a class="btn btn-ghost-w" href="mailto:msc.bdc@polyu.edu.hk" style="border-color:rgba(255,255,255,.5);color:#fff">msc.bdc@polyu.edu.hk</a>
+    </div>
+    <p style="margin:20px auto 0;max-width:620px;font-size:.86rem;color:rgba(255,255,255,.7)">
+      Hong Kong and the NTU dual award share one application (17004) — indicate your dual-degree interest during the application. Zhongshan is a separate application (17005).
+    </p>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <b>MSc in Biopharmaceutical Development &amp; Commercialization</b>
+        Department of Life Sciences,<br>
+        The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong.<br><br>
+        Programme Leader: Prof. Wong Tsun-ting, Clarence (PhD)<br>Deputy Programme Leader: Prof. Ko Chi-bun, Ben (PhD)
+      </div>
+      <div>
+        <b>Programmes</b>
+        <a href="programs/standard.html">Hong Kong route</a>
+        <a href="programs/dual-award.html">Dual award with NTU</a>
+        <a href="programs/zhongshan.html">Zhongshan internship</a>
+      </div>
+      <div>
+        <b>Contact</b>
+        <a href="mailto:msc.bdc@polyu.edu.hk">msc.bdc@polyu.edu.hk</a>
+        <a href="https://www.polyu.edu.hk/ls/" target="_blank" rel="noopener">polyu.edu.hk/ls</a>
+      </div>
+    </div>
+    <div class="base">
+      <span>© 2026 The Hong Kong Polytechnic University. Information subject to change — confirm details on the official programme pages.</span>
+      <span>Entry September 2027</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MSc Biopharmaceutical Development &amp; Commercialization | PolyU</title>
+<meta name="description" content="Three Master of Science routes in Biopharmaceutical Development and Commercialization at PolyU — Hong Kong, the NTU Singapore dual award, and the Zhongshan internship stream." />
+<link rel="stylesheet" href="assets/theme.css" />
+<style>
+  /* ============================================================
+     LANDING STAGE — futuristic white bio-lab
+     ============================================================ */
+  .stage{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 80% at 50% -10%, #FFFFFF 0%, #F4F9FF 45%, #E8F1FB 100%);
+    padding:34px 0 0;
+  }
+  .stage-inner{position:relative;z-index:6}
+
+  /* --- ambient glows --- */
+  .glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1}
+  .glow.a{width:620px;height:620px;left:-14%;top:-18%;background:rgba(6,182,212,.20)}
+  .glow.b{width:560px;height:560px;right:-12%;top:-8%;background:rgba(124,108,240,.18)}
+  .glow.c{width:520px;height:520px;left:38%;bottom:-24%;background:rgba(160,35,55,.13)}
+
+  /* --- back wall: glass cabinets & light bars --- */
+  .wall{position:absolute;inset:0;z-index:2;pointer-events:none}
+  .lightbar{
+    position:absolute;top:0;height:8px;border-radius:0 0 8px 8px;
+    background:linear-gradient(90deg,transparent,rgba(103,232,249,.9),transparent);
+    box-shadow:0 0 26px 6px rgba(103,232,249,.45);
+    animation:sweep 7s ease-in-out infinite;
+  }
+  .lightbar.l1{left:8%;width:22%}
+  .lightbar.l2{left:39%;width:22%;animation-delay:-2.4s}
+  .lightbar.l3{left:70%;width:22%;animation-delay:-4.8s}
+  @keyframes sweep{0%,100%{opacity:.35}50%{opacity:1}}
+
+  .cab{
+    position:absolute;border:1.5px solid rgba(160,183,212,.42);border-radius:14px;
+    background:linear-gradient(160deg,rgba(255,255,255,.75),rgba(226,238,250,.42));
+    backdrop-filter:blur(3px);
+  }
+  .cab::after{
+    content:"";position:absolute;left:12%;right:12%;top:26%;height:1.5px;
+    background:rgba(160,183,212,.4);box-shadow:0 34px 0 rgba(160,183,212,.32),0 68px 0 rgba(160,183,212,.24);
+  }
+  .cab.c1{left:3%;top:14%;width:15%;height:46%}
+  .cab.c2{right:3%;top:11%;width:15%;height:50%}
+  .cab.c3{left:21%;top:22%;width:10%;height:30%;border-radius:10px}
+  .cab.c4{right:21%;top:20%;width:10%;height:32%;border-radius:10px}
+
+  /* --- perspective floor --- */
+  .floor{
+    position:absolute;left:-25%;right:-25%;bottom:0;height:46%;z-index:2;pointer-events:none;
+    background:
+      repeating-linear-gradient(90deg,rgba(150,178,210,.30) 0 1.5px,transparent 1.5px 84px),
+      repeating-linear-gradient(0deg,rgba(150,178,210,.26) 0 1.5px,transparent 1.5px 58px);
+    transform:perspective(560px) rotateX(66deg);transform-origin:bottom center;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 42%);
+    mask-image:linear-gradient(180deg,transparent,#000 42%);
+  }
+
+  /* --- floating molecules --- */
+  .mol{position:absolute;z-index:3;opacity:.7;animation:bob 9s ease-in-out infinite;pointer-events:none}
+  .mol.m1{left:9%;top:30%;width:78px}
+  .mol.m2{right:8%;top:24%;width:96px;animation-delay:-3s}
+  .mol.m3{left:23%;top:56%;width:58px;animation-delay:-5.5s}
+  .mol.m4{right:20%;top:58%;width:64px;animation-delay:-1.8s}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(7deg)}}
+
+  /* --- headline --- */
+  .stage-head{text-align:center;max-width:880px;margin:0 auto 2px}
+  .stage-head h1{
+    font-size:clamp(1.85rem,4.2vw,3.15rem);font-weight:800;letter-spacing:-.03em;
+  }
+  .stage-head h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg,var(--red) 5%,var(--violet) 52%,var(--cyan) 95%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .stage-head p{margin:14px auto 0;max-width:600px;font-size:1.02rem;color:var(--body)}
+
+  /* ============================================================
+     SCENE — scientist + bench + programme cards
+     ============================================================ */
+  .scene{position:relative;height:clamp(440px,66vh,680px);margin-top:10px}
+
+  .sci{
+    position:absolute;left:50%;bottom:112px;z-index:3;
+    height:clamp(310px,48vh,520px);
+    transform:translateX(-50%);
+    animation:idle 6.5s ease-in-out infinite;
+    filter:drop-shadow(0 40px 40px rgba(28,52,92,.16));
+  }
+  .sci svg{height:100%;width:auto}
+  @keyframes idle{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-9px)}}
+
+  /* halo ring behind her */
+  .halo{
+    position:absolute;left:50%;bottom:150px;z-index:2;
+    width:min(430px,74vw);aspect-ratio:1;transform:translateX(-50%);
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.95) 30%,rgba(224,242,254,.55) 58%,transparent 70%);
+  }
+  .halo::before,.halo::after{
+    content:"";position:absolute;inset:6%;border-radius:50%;
+    border:1.5px dashed rgba(6,182,212,.34);animation:spin 26s linear infinite;
+  }
+  .halo::after{inset:19%;border-style:solid;border-color:rgba(124,108,240,.22);animation-duration:38s;animation-direction:reverse}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* --- bench --- */
+  .bench{position:absolute;left:-6%;right:-6%;bottom:0;height:112px;z-index:4}
+  .bench-top{
+    position:absolute;left:0;right:0;top:0;height:26px;border-radius:8px 8px 3px 3px;
+    background:linear-gradient(180deg,#FFFFFF,#E9F0FA 60%,#D8E3F2);
+    box-shadow:0 -1px 0 rgba(255,255,255,.9) inset,0 16px 30px -18px rgba(23,44,80,.5);
+  }
+  .bench-top::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:3px;border-radius:3px;
+    background:linear-gradient(90deg,transparent,rgba(103,232,249,.95),rgba(124,108,240,.75),transparent);
+    box-shadow:0 0 16px rgba(103,232,249,.7);
+  }
+  .bench-front{
+    position:absolute;left:2%;right:2%;top:26px;bottom:0;
+    background:linear-gradient(180deg,#F3F7FD,#DCE6F4);
+    border-top:1px solid rgba(255,255,255,.85);
+  }
+  .bench-front::after{
+    content:"";position:absolute;inset:14px 6% auto;height:1px;background:rgba(150,178,210,.45);
+    box-shadow:0 26px 0 rgba(150,178,210,.3);
+  }
+
+  /* --- programme cards on the bench --- */
+  .rail{
+    position:absolute;left:0;right:0;bottom:92px;z-index:6;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  }
+  .prog{
+    position:relative;display:block;padding:20px 22px 18px;border-radius:18px;
+    background:rgba(255,255,255,.86);backdrop-filter:blur(14px) saturate(150%);
+    border:1.5px solid rgba(198,214,235,.85);
+    box-shadow:0 22px 44px -26px rgba(23,44,80,.55);
+    transition:transform .38s cubic-bezier(.2,.8,.3,1),box-shadow .38s,border-color .38s,background .38s;
+    overflow:hidden;
+  }
+  .prog::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:4px;
+    background:var(--accent,var(--red));opacity:.9;
+  }
+  .prog::after{
+    content:"";position:absolute;inset:0;opacity:0;transition:opacity .38s;
+    background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%);
+  }
+  .prog:hover{transform:translateY(-12px);background:#fff;border-color:var(--accent);box-shadow:0 36px 60px -28px rgba(23,44,80,.6)}
+  .prog:hover::after{opacity:1}
+  .prog:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+  .prog .no{
+    position:absolute;right:20px;top:18px;font-family:var(--head);font-weight:800;
+    font-size:2.4rem;color:var(--accent);opacity:.12;line-height:1;
+  }
+  .prog h3{font-size:1.02rem;margin:11px 0 7px;position:relative;z-index:2;line-height:1.3}
+  .prog p{font-size:.86rem;color:var(--body);position:relative;z-index:2;line-height:1.55}
+  .prog .foot{
+    margin-top:15px;display:flex;align-items:center;justify-content:space-between;
+    gap:10px;flex-wrap:wrap;position:relative;z-index:2;
+  }
+  .prog .meta{
+    display:flex;gap:7px;flex-wrap:wrap;
+    font-size:.72rem;color:var(--muted);font-weight:600;letter-spacing:.03em;
+  }
+  .prog .meta span{background:var(--bg-soft);border:1px solid var(--line);padding:3px 9px;border-radius:100px}
+  .prog .go{
+    display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+    font-family:var(--head);font-weight:700;font-size:.82rem;color:var(--accent);
+  }
+  .prog .go svg{width:15px;height:15px;transition:transform .3s}
+  .prog:hover .go svg{transform:translateX(5px)}
+
+  .hint{
+    text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted);
+    letter-spacing:.05em;position:relative;z-index:7;
+  }
+  .hint b{color:var(--red);font-weight:600}
+
+  /* ============================================================
+     below-the-fold
+     ============================================================ */
+  .band{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cmp{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .cmp th,.cmp td{padding:17px 20px;text-align:left;font-size:.94rem;border-bottom:1px solid var(--line)}
+  .cmp thead th{background:var(--ink);color:#fff;font-family:var(--head);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;border-bottom:none}
+  .cmp tbody tr:last-child td{border-bottom:none}
+  .cmp tbody tr:hover td{background:var(--bg-tint)}
+  .cmp td:first-child,.cmp th:first-child{font-family:var(--head);font-weight:600;color:var(--ink)}
+  .cmp-scroll{overflow-x:auto;border-radius:var(--radius)}
+
+  @media(max-width:900px){
+    .scene{height:auto;margin-top:26px}
+    .sci{
+      position:relative;left:auto;bottom:auto;transform:none;margin:0;animation:none;
+      height:clamp(230px,34vh,300px);display:flex;justify-content:center;
+    }
+    .halo{bottom:auto;top:-10px}
+    .bench{position:relative;left:-6%;right:-6%;bottom:auto;height:26px;margin-top:-6px}
+    .bench-front{display:none}
+    .rail{position:relative;bottom:auto;grid-template-columns:1fr;gap:16px;margin-top:22px}
+    .cab,.mol{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand">
+      <div class="mark">BDC</div>
+      <div class="txt">
+        <b>MSc Biopharmaceutical Development &amp; Commercialization</b>
+        <small>Department of Applied Biology &amp; Chemical Technology · PolyU</small>
+      </div>
+    </a>
+    <button class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links">
+      <a href="#programmes">Programmes</a>
+      <a href="#compare">Compare</a>
+      <a href="#dates">Key Dates</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.polyu.edu.hk/study/pg/tpg/2027/17004-mft-mpt" class="apply" target="_blank" rel="noopener">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= STAGE ================= -->
+<section class="stage">
+  <div class="glow a" data-par="16"></div>
+  <div class="glow b" data-par="-20"></div>
+  <div class="glow c" data-par="10"></div>
+
+  <div class="wall">
+    <i class="lightbar l1"></i><i class="lightbar l2"></i><i class="lightbar l3"></i>
+    <i class="cab c1" data-par="7"></i><i class="cab c2" data-par="-7"></i>
+    <i class="cab c3" data-par="12"></i><i class="cab c4" data-par="-12"></i>
+  </div>
+  <div class="floor"></div>
+
+  <!-- floating molecules -->
+  <svg class="mol m1" data-par="22" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="#06B6D4" stroke-width="2.5" opacity=".8">
+      <path d="M50 18 L22 40 M50 18 L78 40 M22 40 L36 76 M78 40 L64 76 M36 76 L64 76"/>
+    </g>
+    <g fill="#06B6D4"><circle cx="50" cy="18" r="7"/><circle cx="22" cy="40" r="6"/><circle cx="78" cy="40" r="6"/></g>
+    <g fill="#7C6CF0"><circle cx="36" cy="76" r="5.5"/><circle cx="64" cy="76" r="5.5"/></g>
+  </svg>
+  <svg class="mol m2" data-par="-26" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="#7C6CF0" stroke-width="2.5" opacity=".75">
+      <path d="M30 25 L70 25 M30 25 L20 62 M70 25 L80 62 M20 62 L50 82 M80 62 L50 82"/>
+    </g>
+    <g fill="#7C6CF0"><circle cx="30" cy="25" r="6.5"/><circle cx="70" cy="25" r="6.5"/><circle cx="50" cy="82" r="7"/></g>
+    <g fill="#A02337"><circle cx="20" cy="62" r="5"/><circle cx="80" cy="62" r="5"/></g>
+  </svg>
+  <svg class="mol m3" data-par="16" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="#A02337" stroke-width="3" opacity=".6"><path d="M25 30 L75 30 M50 30 L50 75"/></g>
+    <g fill="#A02337"><circle cx="25" cy="30" r="8"/><circle cx="75" cy="30" r="8"/><circle cx="50" cy="75" r="8"/></g>
+  </svg>
+  <svg class="mol m4" data-par="-18" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="#2DD4BF" stroke-width="2.5" opacity=".8"><path d="M50 20 L26 62 L74 62 Z"/></g>
+    <g fill="#2DD4BF"><circle cx="50" cy="20" r="6.5"/><circle cx="26" cy="62" r="6.5"/><circle cx="74" cy="62" r="6.5"/></g>
+  </svg>
+
+  <div class="wrap stage-inner">
+    <div class="stage-head rv in">
+      <span class="kicker" style="margin-left:auto;margin-right:auto">Taught Postgraduate · Entry September 2027</span>
+      <h1>One degree in biopharma.<br><em>Three ways to earn it.</em></h1>
+      <p>Master the science, business and regulation of getting a therapy from the bench to the patient — in Hong Kong, Singapore, or the Greater Bay Area.</p>
+    </div>
+
+    <div class="scene">
+      <div class="halo" aria-hidden="true"></div>
+
+      <!-- ============ SCIENTIST (pointer-tracking) ============ -->
+      <div class="sci">
+        <svg id="scientist" viewBox="0 0 400 620" role="img"
+             aria-label="Illustration of a scientist in a lab coat whose head and eyes follow your cursor">
+          <defs>
+            <!-- skin -->
+            <linearGradient id="skinG" x1=".25" y1="0" x2=".75" y2="1">
+              <stop offset="0" stop-color="#FBDCC0"/><stop offset=".55" stop-color="#F6CDAA"/><stop offset="1" stop-color="#E9B892"/>
+            </linearGradient>
+            <linearGradient id="neckG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#D9A177"/><stop offset="1" stop-color="#EFC09B"/>
+            </linearGradient>
+            <!-- hair -->
+            <linearGradient id="hairG" x1=".2" y1="0" x2=".9" y2="1">
+              <stop offset="0" stop-color="#5A3D2E"/><stop offset=".45" stop-color="#3D2820"/><stop offset="1" stop-color="#221512"/>
+            </linearGradient>
+            <linearGradient id="hairHiG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#8A6247" stop-opacity=".55"/><stop offset="1" stop-color="#8A6247" stop-opacity="0"/>
+            </linearGradient>
+            <!-- eyes -->
+            <radialGradient id="irisG" cx=".5" cy=".42" r=".62">
+              <stop offset="0" stop-color="#B98A5C"/><stop offset=".55" stop-color="#8A5C36"/><stop offset="1" stop-color="#4A2C18"/>
+            </radialGradient>
+            <linearGradient id="scleraG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#DCD6D2"/><stop offset=".38" stop-color="#FBF9F8"/><stop offset="1" stop-color="#EFE9E6"/>
+            </linearGradient>
+            <!-- lips -->
+            <linearGradient id="lipUpG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#B85A63"/><stop offset="1" stop-color="#CB6E76"/>
+            </linearGradient>
+            <linearGradient id="lipLoG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#D9848A"/><stop offset="1" stop-color="#C0656E"/>
+            </linearGradient>
+            <!-- clothing -->
+            <linearGradient id="coatG" x1="0" y1="0" x2=".6" y2="1">
+              <stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#F4F8FD"/><stop offset="1" stop-color="#DFE9F6"/>
+            </linearGradient>
+            <linearGradient id="topG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3ED8CF"/><stop offset="1" stop-color="#17A8B8"/>
+            </linearGradient>
+            <linearGradient id="vialG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#67E8F9"/><stop offset="1" stop-color="#06B6D4"/>
+            </linearGradient>
+            <radialGradient id="blushG"><stop offset="0" stop-color="#E88A80" stop-opacity=".42"/><stop offset="1" stop-color="#E88A80" stop-opacity="0"/></radialGradient>
+
+            <!-- soft shading blurs -->
+            <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4.5"/></filter>
+            <filter id="soft2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.2"/></filter>
+
+            <!-- eye clips: irises and lids can never escape the eye opening -->
+            <clipPath id="clipL">
+              <path d="M165 133 C168 123 172 119 178 119 C184 119 188 123 191 133 C188 141 184 145 178 145 C172 145 168 141 165 133 Z"/>
+            </clipPath>
+            <clipPath id="clipR">
+              <path d="M235 133 C232 123 228 119 222 119 C216 119 212 123 209 133 C212 141 216 145 222 145 C228 145 232 141 235 133 Z"/>
+            </clipPath>
+          </defs>
+
+          <!-- contact shadow -->
+          <ellipse cx="200" cy="604" rx="118" ry="15" fill="#1C346B" opacity=".12"/>
+
+          <!-- ================= BODY ================= -->
+          <g id="sci-body">
+            <!-- legs -->
+            <path d="M170 424 h28 l-2 166 h-30 z" fill="#2E3444"/>
+            <path d="M202 424 h28 l4 166 h-30 z" fill="#394052"/>
+            <!-- shoes -->
+            <path d="M160 578 h40 v18 a6 6 0 0 1-6 6 h-40 a5 5 0 0 1-3-9 z" fill="#1B1E24"/>
+            <path d="M204 578 h40 l9 15 a5 5 0 0 1-3 9 h-40 a6 6 0 0 1-6-6 z" fill="#1B1E24"/>
+
+            <!-- inner top (visible in the coat's V) -->
+            <path d="M170 214 L200 302 L230 214 Z" fill="url(#topG)"/>
+
+            <!-- coat -->
+            <path d="M200 210 C176 210 160 217 150 228 C133 249 124 300 120 352
+                     L114 452 L286 452 L280 352 C276 300 267 249 250 228
+                     C240 217 224 210 200 210 Z"
+                  fill="url(#coatG)" stroke="#D3DEEC" stroke-width="2.5" stroke-linejoin="round"/>
+
+            <!-- lapels -->
+            <path d="M172 212 L200 300 L200 320 L146 230 Z" fill="#FFFFFF" stroke="#D3DEEC" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M228 212 L200 300 L200 320 L254 230 Z" fill="#F7FAFE" stroke="#D3DEEC" stroke-width="2.2" stroke-linejoin="round"/>
+
+            <!-- coat fold shading -->
+            <path d="M150 250 C144 300 138 360 136 440" stroke="#D7E1EF" stroke-width="7" fill="none" opacity=".7" filter="url(#soft2)"/>
+            <path d="M250 250 C256 300 262 360 264 440" stroke="#D7E1EF" stroke-width="7" fill="none" opacity=".7" filter="url(#soft2)"/>
+            <path d="M172 330 C176 370 176 410 174 448" stroke="#E6EDF7" stroke-width="5" fill="none" opacity=".9"/>
+            <path d="M228 330 C224 370 224 410 226 448" stroke="#E6EDF7" stroke-width="5" fill="none" opacity=".9"/>
+
+            <!-- buttons + pocket + seam -->
+            <g fill="#C7D4E6"><circle cx="200" cy="340" r="4.5"/><circle cx="200" cy="376" r="4.5"/><circle cx="200" cy="412" r="4.5"/></g>
+            <rect x="228" y="356" width="46" height="36" rx="5" fill="none" stroke="#D3DEEC" stroke-width="2.2"/>
+            <path d="M200 320 L200 440" stroke="#E3EBF5" stroke-width="2"/>
+
+            <!-- ID badge -->
+            <g>
+              <rect x="136" y="330" width="30" height="40" rx="4" fill="#FFFFFF" stroke="#CBD8E8" stroke-width="2"/>
+              <rect x="136" y="330" width="30" height="11" rx="4" fill="#A02337"/>
+              <g fill="#D3DEEC"><rect x="142" y="348" width="18" height="3" rx="1.5"/><rect x="142" y="356" width="13" height="3" rx="1.5"/></g>
+            </g>
+
+            <!-- arms -->
+            <path d="M152 236 C128 272 118 336 116 396" stroke="#D3DEEC" stroke-width="42" stroke-linecap="round" fill="none"/>
+            <path d="M152 236 C128 272 118 336 116 396" stroke="url(#coatG)" stroke-width="37" stroke-linecap="round" fill="none"/>
+            <path d="M248 236 C272 272 282 336 284 396" stroke="#D3DEEC" stroke-width="42" stroke-linecap="round" fill="none"/>
+            <path d="M248 236 C272 272 282 336 284 396" stroke="url(#coatG)" stroke-width="37" stroke-linecap="round" fill="none"/>
+
+            <!-- hands -->
+            <ellipse cx="115" cy="410" rx="14" ry="16" fill="url(#skinG)"/>
+            <path d="M104 408 C108 418 122 418 126 408" stroke="#DCA57C" stroke-width="1.6" fill="none" opacity=".6"/>
+            <ellipse cx="285" cy="410" rx="14" ry="16" fill="url(#skinG)"/>
+            <path d="M274 408 C278 418 292 418 296 408" stroke="#DCA57C" stroke-width="1.6" fill="none" opacity=".6"/>
+
+            <!-- glowing vial in the right hand -->
+            <g>
+              <rect x="276" y="352" width="19" height="52" rx="8" fill="#EAF7FB" stroke="#B9D3E2" stroke-width="2"/>
+              <path d="M278 378 h15 v18 a7 7 0 0 1-7 7 h-1 a7 7 0 0 1-7-7 z" fill="url(#vialG)"/>
+              <rect x="274" y="346" width="23" height="8" rx="4" fill="#CBD8E8"/>
+              <circle cx="285" cy="372" r="2.6" fill="#67E8F9" opacity=".85">
+                <animate attributeName="cy" values="392;356;392" dur="3.4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0;.9;0" dur="3.4s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+          </g>
+
+          <!-- ================= HEAD (tracks pointer) ================= -->
+          <g id="sci-head">
+            <!-- neck + jaw shadow -->
+            <path d="M182 166 h36 v40 c0 13 -36 13 -36 0 z" fill="url(#neckG)"/>
+            <path d="M176 168 C186 186 214 186 224 168 C220 186 208 194 200 194 C192 194 180 186 176 168 Z"
+                  fill="#C58C63" opacity=".55" filter="url(#soft)"/>
+
+            <!-- hair: back mass -->
+            <path d="M200 38 C152 38 126 72 126 118 C126 152 121 198 112 246
+                     C108 268 106 278 105 286 C127 292 147 279 153 252
+                     C159 226 161 196 161 170 L239 170
+                     C239 196 241 226 247 252 C253 279 273 292 295 286
+                     C294 278 292 268 288 246 C279 198 274 152 274 118
+                     C274 72 248 38 200 38 Z" fill="url(#hairG)"/>
+
+            <!-- ears -->
+            <path d="M152 124 C144 122 141 132 143 142 C145 152 151 156 156 152 Z" fill="#EFC09B"/>
+            <path d="M248 124 C256 122 259 132 257 142 C255 152 249 156 244 152 Z" fill="#EFC09B"/>
+            <circle cx="150" cy="152" r="3.2" fill="#E8C173"/>
+            <circle cx="250" cy="152" r="3.2" fill="#E8C173"/>
+
+            <!-- face -->
+            <path d="M200 58 C170 58 152 76 149 104 C147 120 149 138 154 156
+                     C160 177 178 198 200 198 C222 198 240 177 246 156
+                     C251 138 253 120 251 104 C248 76 230 58 200 58 Z"
+                  fill="url(#skinG)"/>
+
+            <!-- cheek / temple contour shading -->
+            <path d="M154 140 C158 158 164 172 174 184 C162 178 154 162 151 142 Z" fill="#DCA57C" opacity=".5" filter="url(#soft)"/>
+            <path d="M246 140 C242 158 236 172 226 184 C238 178 246 162 249 142 Z" fill="#DCA57C" opacity=".5" filter="url(#soft)"/>
+            <ellipse cx="170" cy="152" rx="15" ry="10" fill="url(#blushG)"/>
+            <ellipse cx="230" cy="152" rx="15" ry="10" fill="url(#blushG)"/>
+
+            <!-- brows: tapered, hair-toned -->
+            <path d="M161 111 C169 102 186 101 196 108 C195 111 193 112 190 111 C181 106 170 107 163 114 Z" fill="#4A3327"/>
+            <path d="M239 111 C231 102 214 101 204 108 C205 111 207 112 210 111 C219 106 230 107 237 114 Z" fill="#4A3327"/>
+
+            <!-- ================= EYES ================= -->
+            <!-- socket shading -->
+            <path d="M163 128 C168 116 190 114 194 127 C186 120 172 121 163 128 Z" fill="#D3A17C" opacity=".55" filter="url(#soft2)"/>
+            <path d="M237 128 C232 116 210 114 206 127 C214 120 228 121 237 128 Z" fill="#D3A17C" opacity=".55" filter="url(#soft2)"/>
+
+            <!-- sclera -->
+            <g clip-path="url(#clipL)"><rect x="160" y="112" width="38" height="40" fill="url(#scleraG)"/></g>
+            <g clip-path="url(#clipR)"><rect x="202" y="112" width="38" height="40" fill="url(#scleraG)"/></g>
+
+            <!-- irises: translated by JS, clipped to each eye opening -->
+            <g id="sci-pupils">
+              <g clip-path="url(#clipL)">
+                <circle cx="178" cy="130" r="9" fill="url(#irisG)"/>
+                <circle cx="178" cy="130" r="9" fill="none" stroke="#33200F" stroke-width="1.6" opacity=".8"/>
+                <circle cx="178" cy="130" r="4.2" fill="#150C06"/>
+                <circle cx="174.6" cy="126.4" r="2.9" fill="#fff" opacity=".95"/>
+                <circle cx="181.4" cy="134" r="1.5" fill="#fff" opacity=".5"/>
+              </g>
+              <g clip-path="url(#clipR)">
+                <circle cx="222" cy="130" r="9" fill="url(#irisG)"/>
+                <circle cx="222" cy="130" r="9" fill="none" stroke="#33200F" stroke-width="1.6" opacity=".8"/>
+                <circle cx="222" cy="130" r="4.2" fill="#150C06"/>
+                <circle cx="218.6" cy="126.4" r="2.9" fill="#fff" opacity=".95"/>
+                <circle cx="225.4" cy="134" r="1.5" fill="#fff" opacity=".5"/>
+              </g>
+            </g>
+
+            <!-- eyelids (blink), clipped so they close inside the eye shape -->
+            <g clip-path="url(#clipL)">
+              <rect id="lid-l" x="160" y="112" width="38" height="40" fill="url(#skinG)"
+                    style="transform-box:fill-box;transform-origin:50% 0%;transform:scaleY(0);transition:transform .09s ease"/>
+            </g>
+            <g clip-path="url(#clipR)">
+              <rect id="lid-r" x="202" y="112" width="38" height="40" fill="url(#skinG)"
+                    style="transform-box:fill-box;transform-origin:50% 0%;transform:scaleY(0);transition:transform .09s ease"/>
+            </g>
+
+            <!-- upper lash line + outer flick -->
+            <path d="M164 132 C167 121 172 117 178 117 C185 117 189 122 192 132"
+                  stroke="#2A1A13" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+            <path d="M236 132 C233 121 228 117 222 117 C215 117 211 122 208 132"
+                  stroke="#2A1A13" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+            <path d="M164 131 L159 127" stroke="#2A1A13" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M236 131 L241 127" stroke="#2A1A13" stroke-width="2.4" stroke-linecap="round"/>
+            <!-- lower lash -->
+            <path d="M167 139 C172 144 184 144 190 137" stroke="#B98868" stroke-width="1.3" fill="none" opacity=".75"/>
+            <path d="M233 139 C228 144 216 144 210 137" stroke="#B98868" stroke-width="1.3" fill="none" opacity=".75"/>
+            <!-- lid crease -->
+            <path d="M163 119 C170 111 187 110 194 117" stroke="#D6A57F" stroke-width="1.6" fill="none" opacity=".8"/>
+            <path d="M237 119 C230 111 213 110 206 117" stroke="#D6A57F" stroke-width="1.6" fill="none" opacity=".8"/>
+
+            <!-- ================= NOSE ================= -->
+            <path d="M195 150 C195 140 205 140 205 150 C205 156 200 158 200 158 C200 158 195 156 195 150 Z"
+                  fill="#DCA57C" opacity=".42" filter="url(#soft2)"/>
+            <ellipse cx="193.5" cy="156" rx="2.6" ry="1.8" fill="#C08560" opacity=".8"/>
+            <ellipse cx="206.5" cy="156" rx="2.6" ry="1.8" fill="#C08560" opacity=".8"/>
+            <path d="M197 138 C198 145 198 150 197 153" stroke="#FCE3CB" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".55"/>
+
+            <!-- ================= LIPS ================= -->
+            <path d="M185 170 C190 165 196 165 200 168 C204 165 210 165 215 170
+                     C210 172 204 173 200 173 C196 173 190 172 185 170 Z" fill="url(#lipUpG)"/>
+            <path d="M186 171 C192 179 208 179 214 171 C211 181 189 181 186 171 Z" fill="url(#lipLoG)"/>
+            <path d="M185 170.5 C193 173 207 173 215 170.5" stroke="#9E4550" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="200" cy="176" rx="6" ry="2" fill="#fff" opacity=".22"/>
+            <!-- chin shadow -->
+            <ellipse cx="200" cy="186" rx="9" ry="3.5" fill="#D89F76" opacity=".45" filter="url(#soft2)"/>
+
+            <!-- ================= HAIR: front ================= -->
+            <path d="M126 130 C123 76 154 42 200 42 C246 42 277 76 274 130
+                     C269 105 257 88 239 79 C231 96 212 108 188 114
+                     C167 119 145 122 130 136 C128 134 127 132 126 130 Z" fill="url(#hairG)"/>
+            <!-- strand highlights -->
+            <path d="M138 118 C142 88 164 62 196 58" stroke="url(#hairHiG)" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <path d="M214 60 C240 68 258 88 264 116" stroke="url(#hairHiG)" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M133 150 C130 190 126 226 119 262" stroke="url(#hairHiG)" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M268 152 C271 192 275 228 282 264" stroke="url(#hairHiG)" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <!-- loose strand across the temple -->
+            <path d="M149 112 C158 96 174 86 192 84" stroke="#3D2820" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- ============ BENCH ============ -->
+      <div class="bench" aria-hidden="true">
+        <div class="bench-top"></div>
+        <div class="bench-front"></div>
+      </div>
+
+      <!-- ============ THE THREE PROGRAMMES ============ -->
+      <div class="rail">
+        <a class="prog rv" data-d="1" href="programs/standard.html" style="--accent:#A02337">
+          <span class="no">01</span>
+          <span class="pill pill-red">Hong Kong</span>
+          <h3>MSc in Biopharmaceutical Development &amp; Commercialization</h3>
+          <p>The flagship route — one year in Hong Kong, from biologics to market entry.</p>
+          <div class="foot">
+            <div class="meta"><span>1 yr FT</span><span>31 credits</span></div>
+            <span class="go">Explore
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a class="prog rv" data-d="2" href="programs/dual-award.html" style="--accent:#7C6CF0">
+          <span class="no">02</span>
+          <span class="pill pill-violet">Dual Award · NTU</span>
+          <h3>Dual Degree with MSc in Biomedical Data Science</h3>
+          <p>Two universities, two master's degrees — Year 1 PolyU, Year 2 NTU Singapore.</p>
+          <div class="foot">
+            <div class="meta"><span>2 yr FT</span><span>61 credits</span></div>
+            <span class="go">Explore
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a class="prog rv" data-d="3" href="programs/zhongshan.html" style="--accent:#06B6D4">
+          <span class="no">03</span>
+          <span class="pill pill-cyan">Zhongshan · GBA</span>
+          <h3>With Internship at the PolyU-Zhongshan Institute</h3>
+          <p>The same degree, plus an industry placement in the Greater Bay Area.</p>
+          <div class="foot">
+            <div class="meta"><span>1 yr FT</span><span>Internship</span></div>
+            <span class="go">Explore
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <p class="hint">Move your cursor — <b>she's watching</b>. Pick a bench card to open a programme.</p>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section id="programmes">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Why this degree</span>
+      <h2>Science alone doesn't reach patients. <em>Strategy does.</em></h2>
+      <p>The curriculum integrates the scientific, business, regulatory and ethical dimensions of the biopharmaceutical landscape — so you can move a therapy from discovery all the way to approval and launch.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card rv" data-d="1"><div class="ico">🧬</div><h3>Cutting-edge therapeutics</h3><p>Biologics, protein engineering, and cell &amp; gene therapies — the modalities defining the next decade of medicine.</p></div>
+      <div class="card rv" data-d="2"><div class="ico">⚖️</div><h3>Regulatory expertise</h3><p>Clinical trials, drug approval pathways and the intellectual property strategy that protects an asset's value.</p></div>
+      <div class="card rv" data-d="3"><div class="ico">📈</div><h3>Commercial acumen</h3><p>Market entry, pricing and business development — how a therapy becomes a viable, fundable product.</p></div>
+      <div class="card rv" data-d="1"><div class="ico">🤝</div><h3>Interdisciplinary teams</h3><p>Work the way industry works: scientists, regulators, analysts and commercial leads solving problems together.</p></div>
+      <div class="card rv" data-d="2"><div class="ico">🌏</div><h3>Three geographies</h3><p>Hong Kong, Singapore and the Greater Bay Area — choose the market where you want to build your career.</p></div>
+      <div class="card rv" data-d="3"><div class="ico">🎓</div><h3>Led by practitioners</h3><p>Directed by Prof. Wong Tsun-ting, Clarence (PhD) within PolyU's Department of Applied Biology &amp; Chemical Technology.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARE ================= -->
+<section id="compare" class="band">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Side by side</span>
+      <h2>Which route fits you?</h2>
+      <p>All three share the same core philosophy. They differ in length, location and what you walk away holding.</p>
+    </div>
+    <div class="cmp-scroll rv">
+      <table class="cmp">
+        <thead>
+          <tr><th>&nbsp;</th><th>Hong Kong</th><th>Dual Award (NTU)</th><th>Zhongshan</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Programme code</td><td>17004</td><td>Dual degree stream</td><td>17005</td></tr>
+          <tr><td>Duration</td><td>1 yr FT / 2 yr PT</td><td>2 years full-time</td><td>1 year full-time</td></tr>
+          <tr><td>Credits</td><td>31</td><td>61</td><td>31</td></tr>
+          <tr><td>Tuition</td><td>HK$8,400 / credit</td><td>HK$176,400 + SGD 63,595</td><td>HK$8,900 / credit</td></tr>
+          <tr><td>Award</td><td>One MSc</td><td>Two MSc degrees</td><td>One MSc + internship</td></tr>
+          <tr><td>Where</td><td>Hong Kong</td><td>Hong Kong → Singapore</td><td>Hong Kong + Zhongshan</td></tr>
+          <tr>
+            <td>Details</td>
+            <td><a href="programs/standard.html" style="color:var(--red);font-weight:600">View →</a></td>
+            <td><a href="programs/dual-award.html" style="color:var(--violet);font-weight:600">View →</a></td>
+            <td><a href="programs/zhongshan.html" style="color:#0E7490;font-weight:600">View →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DATES ================= -->
+<section id="dates">
+  <div class="wrap">
+    <div class="grid g2" style="align-items:center;gap:56px">
+      <div class="rv">
+        <span class="kicker">Admissions</span>
+        <h2 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Key dates for the <em style="font-style:normal;color:var(--red)">September 2027</em> intake</h2>
+        <p style="margin-top:16px">Applications are reviewed in two rounds and places fill quickly. Early applications are strongly encouraged across all three programmes.</p>
+        <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-top:32px">
+          <div class="stat"><b><span data-count="31">31</span></b><span>Credits (HK route)</span></div>
+          <div class="stat"><b><span data-count="3">3</span></b><span>Programme routes</span></div>
+        </div>
+      </div>
+      <div class="rv" data-d="2">
+        <div class="tl">
+          <div class="item"><span>Round 1</span><h4>Early Round closes — 20 October 2026</h4><p>Strongly recommended. Best availability and earliest decisions.</p></div>
+          <div class="item"><span>Round 2</span><h4>Main Round closes — 25 February 2027</h4><p>Remaining places are offered on a competitive, rolling basis.</p></div>
+          <div class="item"><span>Start</span><h4>Studies begin — September 2027</h4><p>Registration and orientation at PolyU, Hung Hom, Hong Kong.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <span class="kicker" style="color:#fff">Ready when you are</span>
+    <h2>Take biopharma from the bench to the market.</h2>
+    <p>Questions about entrance requirements, subjects or which route suits your background? The programme team is happy to help.</p>
+    <div class="btns">
+      <a class="btn btn-red" href="https://www.polyu.edu.hk/study/pg/tpg/2027/17004-mft-mpt" target="_blank" rel="noopener">Apply online</a>
+      <a class="btn btn-glass" href="mailto:msc.bdc@polyu.edu.hk">msc.bdc@polyu.edu.hk</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <b>MSc in Biopharmaceutical Development &amp; Commercialization</b>
+        Department of Applied Biology and Chemical Technology,<br>
+        The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong.<br><br>
+        Programme Leader: Prof. Wong Tsun-ting, Clarence (PhD)
+      </div>
+      <div>
+        <b>Programmes</b>
+        <a href="programs/standard.html">Hong Kong route</a>
+        <a href="programs/dual-award.html">Dual award with NTU</a>
+        <a href="programs/zhongshan.html">Zhongshan internship</a>
+      </div>
+      <div>
+        <b>Contact</b>
+        <a href="mailto:msc.bdc@polyu.edu.hk">msc.bdc@polyu.edu.hk</a>
+        <a href="https://www.polyu.edu.hk/ls/" target="_blank" rel="noopener">polyu.edu.hk/ls</a>
+      </div>
+    </div>
+    <div class="base">
+      <span>© 2026 The Hong Kong Polytechnic University. Information subject to change — confirm details on the official programme pages.</span>
+      <span>Entry September 2027</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
