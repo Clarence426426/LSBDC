@@ -270,6 +270,37 @@
     .stage-head{padding-top:calc(46vh + 18px)}
     .photo-inner{right:-31%}
   }
+
+  /* ---------- student sharing / testimonials ---------- */
+  .testi{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px;position:relative;overflow:hidden;
+    transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .35s;
+  }
+  .testi:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .testi-quote{
+    position:absolute;top:10px;right:24px;font-family:var(--head);font-size:5rem;font-weight:800;
+    line-height:1;color:var(--red);opacity:.08;pointer-events:none;
+  }
+  .testi blockquote{
+    position:relative;z-index:1;margin:0;font-size:1.02rem;line-height:1.7;color:var(--ink);font-style:normal;
+  }
+  .testi figcaption{
+    margin:22px 0 0;padding-top:20px;border-top:1px solid var(--line);
+    display:flex;align-items:center;gap:14px;
+  }
+  .testi .avatar{
+    width:52px;height:52px;border-radius:50%;flex:none;overflow:hidden;
+    display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:1rem;color:#fff;
+    background:linear-gradient(135deg,var(--red),var(--violet));
+  }
+  .testi .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .testi .who b{display:block;font-family:var(--head);font-size:.98rem;color:var(--ink);font-weight:700}
+  .testi .who small{display:block;font-size:.82rem;color:var(--muted);margin-top:2px}
+  @media(max-width:480px){
+    .testi{padding:24px 20px}
+    .testi-quote{font-size:3.6rem}
+  }
 </style>
 </head>
 <body>
@@ -592,6 +623,41 @@
       <div class="card rv" data-d="1"><div class="ico">🤝</div><h3>Interdisciplinary teams</h3><p>Work the way industry works: scientists, regulators, analysts and commercial leads solving problems together.</p></div>
       <div class="card rv" data-d="2"><div class="ico">🌏</div><h3>Three geographies</h3><p>Hong Kong, Singapore and the Greater Bay Area — choose the market where you want to build your career.</p></div>
       <div class="card rv" data-d="3"><div class="ico">🎓</div><h3>Led by practitioners</h3><p>Directed by Prof. Wong Tsun-ting, Clarence (PhD) within PolyU's Department of Life Sciences.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STUDENT SHARING ================= -->
+<section id="students" class="band">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Student Sharing</span>
+      <h2>What our <em>graduates say</em></h2>
+      <p>Hear directly from students of the MSc in Biopharmaceutical Development and Commercialization.</p>
+    </div>
+    <div class="grid g2">
+      <figure class="testi rv" data-d="1">
+        <span class="testi-quote" aria-hidden="true">&ldquo;</span>
+        <blockquote>The perfect combination of course learning and industry practice is particularly valuable! The MSc BDC Programme not only broadens my professional horizons but also enables me to master hands-on workplace skills.</blockquote>
+        <figcaption>
+          <span class="avatar" aria-hidden="true">CW</span>
+          <span class="who">
+            <b>Cecilia Wu</b>
+            <small>Class of 2026</small>
+          </span>
+        </figcaption>
+      </figure>
+      <figure class="testi rv" data-d="2">
+        <span class="testi-quote" aria-hidden="true">&ldquo;</span>
+        <blockquote>The MSc BDC Programme has given me a genuine understanding of the full pipeline from laboratory to market to capital, and the confidence to pursue a long-term career in this industry.</blockquote>
+        <figcaption>
+          <span class="avatar" aria-hidden="true">JL</span>
+          <span class="who">
+            <b>Jieyi Li</b>
+            <small>Class of 2026</small>
+          </span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
