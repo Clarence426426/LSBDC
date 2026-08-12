@@ -152,6 +152,8 @@
   .chip b{display:block;font-family:var(--head);font-size:.69rem;letter-spacing:.07em;color:var(--red);margin-bottom:3px}
   .chip span{font-size:.81rem;line-height:1.4;color:var(--ink)}
   .chip i{display:block;margin-top:6px;font-style:normal;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .chip i.pick{color:var(--red)}
+  .chip .or{font-style:normal;font-weight:700;color:var(--red);font-size:.72rem;letter-spacing:.03em;margin:0 2px}
 
   .curr{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .currcol{
@@ -268,8 +270,8 @@
     </div>
     <button class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     <nav class="nav-links">
-      <a href="#programmes">Programmes</a>
-      <a href="#compare">Compare</a>
+      <a href="#compare">Curriculum</a>
+      <a href="#programmes">Why Us</a>
       <a href="#dates">Key Dates</a>
       <a href="#contact">Contact</a>
       <div class="apply-wrap">
@@ -364,25 +366,6 @@
   </div>
 </section>
 
-<!-- ================= WHY ================= -->
-<section id="programmes">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">Why this degree</span>
-      <h2>Science alone doesn't reach patients. <em>Strategy does.</em></h2>
-      <p>The curriculum integrates the scientific, business, regulatory and ethical dimensions of the biopharmaceutical landscape — so you can move a therapy from discovery all the way to approval and launch.</p>
-    </div>
-    <div class="grid g3">
-      <div class="card rv" data-d="1"><div class="ico">🧬</div><h3>Cutting-edge therapeutics</h3><p>Biologics, protein engineering, and cell &amp; gene therapies — the modalities defining the next decade of medicine.</p></div>
-      <div class="card rv" data-d="2"><div class="ico">⚖️</div><h3>Regulatory expertise</h3><p>Clinical trials, drug approval pathways and the intellectual property strategy that protects an asset's value.</p></div>
-      <div class="card rv" data-d="3"><div class="ico">📈</div><h3>Commercial acumen</h3><p>Market entry, pricing and business development — how a therapy becomes a viable, fundable product.</p></div>
-      <div class="card rv" data-d="1"><div class="ico">🤝</div><h3>Interdisciplinary teams</h3><p>Work the way industry works: scientists, regulators, analysts and commercial leads solving problems together.</p></div>
-      <div class="card rv" data-d="2"><div class="ico">🌏</div><h3>Three geographies</h3><p>Hong Kong, Singapore and the Greater Bay Area — choose the market where you want to build your career.</p></div>
-      <div class="card rv" data-d="3"><div class="ico">🎓</div><h3>Led by practitioners</h3><p>Directed by Prof. Wong Tsun-ting, Clarence (PhD) within PolyU's Department of Life Sciences.</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- ================= COMPARE ================= -->
 <section id="compare" class="band">
   <div class="wrap">
@@ -432,7 +415,11 @@
         <div class="chip"><b>ABCT5105</b><span>Ethics and Management in Life Sciences</span></div>
         <div class="chip"><b>ABCT5106</b><span>Technology Platforms in Drug Discovery</span></div>
         <div class="chip"><b>ABCT5107</b><span>Advanced Therapeutic Products</span></div>
-        <div class="chip"><b>ABCT5108</b><span>Investment Financing and Risk Management in Biobusiness</span></div>
+        <div class="chip">
+          <b>ABCT5108 / ABCT5109</b>
+          <span>Investment Financing and Risk Management in Biobusiness <em class="or">or</em> Entrepreneurship: From Lab to Launch</span>
+          <i class="pick">Choose 1 of 2</i>
+        </div>
       </div>
     </div>
 
@@ -560,6 +547,25 @@
       <a href="https://www.polyu.edu.hk/ls/study/taught-postgraduate-programmes/master-of-science-in-biopharmaceutical-development-and-commercialization-zhongshan/curriculum/" target="_blank" rel="noopener">Zhongshan</a>).
       Per-subject credit values are shown only where the curriculum pages publish them; totals are taken from the programme pages. Subject offerings are subject to change — confirm with the department before applying.
     </p>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section id="programmes">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">Why this degree</span>
+      <h2>Science alone doesn't reach patients. <em>Strategy does.</em></h2>
+      <p>The curriculum integrates the scientific, business, regulatory and ethical dimensions of the biopharmaceutical landscape — so you can move a therapy from discovery all the way to approval and launch.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card rv" data-d="1"><div class="ico">🧬</div><h3>Cutting-edge therapeutics</h3><p>Biologics, protein engineering, and cell &amp; gene therapies — the modalities defining the next decade of medicine.</p></div>
+      <div class="card rv" data-d="2"><div class="ico">⚖️</div><h3>Regulatory expertise</h3><p>Clinical trials, drug approval pathways and the intellectual property strategy that protects an asset's value.</p></div>
+      <div class="card rv" data-d="3"><div class="ico">📈</div><h3>Commercial acumen</h3><p>Market entry, pricing and business development — how a therapy becomes a viable, fundable product.</p></div>
+      <div class="card rv" data-d="1"><div class="ico">🤝</div><h3>Interdisciplinary teams</h3><p>Work the way industry works: scientists, regulators, analysts and commercial leads solving problems together.</p></div>
+      <div class="card rv" data-d="2"><div class="ico">🌏</div><h3>Three geographies</h3><p>Hong Kong, Singapore and the Greater Bay Area — choose the market where you want to build your career.</p></div>
+      <div class="card rv" data-d="3"><div class="ico">🎓</div><h3>Led by practitioners</h3><p>Directed by Prof. Wong Tsun-ting, Clarence (PhD) within PolyU's Department of Life Sciences.</p></div>
+    </div>
   </div>
 </section>
 
