@@ -159,4 +159,7 @@
   .qfacts{grid-template-columns:1fr}
   .qfacts div{border-right:none;border-bottom:1px solid var(--line);padding:12px 0}
   .qfacts div:last-child{border-bottom:none}
+  .callout,.split .half{padding:24px 20px}
+  .fee{padding:20px 18px}
+  .phero{padding:56px 0 64px}
 }

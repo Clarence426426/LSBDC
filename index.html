@@ -132,7 +132,22 @@
   .cmp tbody tr:last-child td{border-bottom:none}
   .cmp tbody tr:hover td{background:var(--bg-tint)}
   .cmp td:first-child,.cmp th:first-child{font-family:var(--head);font-weight:600;color:var(--ink)}
-  .cmp-scroll{overflow-x:auto;border-radius:var(--radius)}
+  .cmp-scroll{overflow-x:auto;border-radius:var(--radius);-webkit-overflow-scrolling:touch}
+  .scroll-hint{display:none;margin-top:10px;font-size:.78rem;color:var(--muted);text-align:right}
+  @media(max-width:700px){
+    .scroll-hint{display:block}
+    .cmp th,.cmp td{padding:12px 14px;font-size:.83rem}
+    .cmp thead th{font-size:.7rem}
+    /* first column stays put while the rest scrolls, so the row label is
+       never lost off-screen — the single biggest fix for a horizontally
+       scrolling table on a phone */
+    .cmp td:first-child,.cmp th:first-child{
+      position:sticky;left:0;z-index:1;
+      background:var(--bg-soft);
+      box-shadow:2px 0 8px -3px rgba(20,30,60,.18);
+    }
+    .cmp thead th:first-child{background:var(--ink)}
+  }
 
   /* ---------- curriculum comparison ---------- */
   .curr-head{margin:64px 0 22px;max-width:700px}
@@ -216,13 +231,23 @@
     .spine{grid-template-columns:1fr;gap:16px}
     .chips{grid-template-columns:repeat(2,1fr)}
   }
-  @media(max-width:560px){ .chips{grid-template-columns:1fr} }
+  @media(max-width:560px){
+    .chips{grid-template-columns:1fr}
+    .spine{padding:20px 18px}
+    .currcol{padding:20px 18px 18px}
+  }
 
   /* On narrow screens the stage grows tall as the cards stack, so the photo
      stops being a full background and becomes a banner band at the top,
      with the copy and cards flowing beneath it on white. */
   @media(max-width:900px){
-    .stage{min-height:0;background:#fff;padding-bottom:12px;display:block}
+    /* .stage inherits the generic "section{padding:96px 0}" rule, which the
+       desktop layout never needed to override because .photo-wrap spans the
+       full height there. On mobile .photo-wrap becomes a fixed-height band
+       and .stage-head's own padding-top:calc(54vh + 20px) is tuned to sit
+       flush under it — the inherited 96px padding-top just adds a stray gap
+       on top of that math, so it's zeroed here (mobile-only; desktop untouched). */
+    .stage{min-height:0;background:#fff;padding-top:0;padding-bottom:12px;display:block}
     .photo-wrap{inset:0 0 auto 0;height:54vh}
     .photo-inner{width:auto;min-width:0;height:100%;right:-29%;left:auto;top:0}  /* keeps her face centred */
     .tint{height:54vh;opacity:.22}
@@ -268,7 +293,7 @@
         <span class="logo-fb" style="display:none">Department of<br>Life Sciences</span>
       </a>
     </div>
-    <button class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav-links">
       <a href="#compare">Curriculum</a>
       <a href="#programmes">Why Us</a>
@@ -395,6 +420,7 @@
         </tbody>
       </table>
     </div>
+    <p class="scroll-hint">Swipe left for Dual Award &amp; Zhongshan →</p>
 
     <!-- ============ CURRICULUM COMPARISON ============ -->
     <div class="curr-head rv">

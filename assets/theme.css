@@ -162,7 +162,7 @@ header.nav{
 .nav-links a.active{color:var(--red)}
 .nav-links .apply{background:var(--red);color:#fff;padding:10px 22px;margin-left:8px}
 .nav-links .apply:hover{background:var(--red-dark);color:#fff}
-.burger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--ink)}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:11px;color:var(--ink);margin:-11px}
 .burger span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;margin:5px 0;transition:.25s}
 
 /* ---------- scroll reveal ---------- */
@@ -255,9 +255,14 @@ footer .base{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,
     background:#fff;border-bottom:1px solid var(--line);padding:14px 22px 20px;gap:4px;
     box-shadow:var(--shadow-sm);display:none;
   }
-  .nav-links.open{display:flex}
+  .nav-links.open{display:flex;max-height:calc(100vh - 74px);overflow-y:auto}
+  .nav-links > a{padding:14px 12px;font-size:1rem;border-bottom:1px solid var(--line)}
   .nav-links .apply{margin:8px 0 0;text-align:center;justify-content:center}
   footer .cols{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .wrap{padding:0 18px}
+  .card{padding:24px 20px}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.01ms!important}

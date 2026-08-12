@@ -29,9 +29,31 @@
     var burger = document.querySelector('.burger');
     var links = document.querySelector('.nav-links');
     if (!burger || !links) return;
-    burger.addEventListener('click', function () { links.classList.toggle('open'); });
+
+    function setOpen(open) {
+      links.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    burger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setOpen(!links.classList.contains('open'));
+    });
+
+    /* closest('a'), not tagName — a tap on the bold title or the code badge
+       inside an .apply-menu link is a tap on nested text, not the <a> itself */
     links.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') links.classList.remove('open');
+      if (e.target.closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (links.classList.contains('open') && !links.contains(e.target) && !burger.contains(e.target)) {
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.key === 'Esc') && links.classList.contains('open')) setOpen(false);
     });
   }
 
