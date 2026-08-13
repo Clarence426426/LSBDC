@@ -228,13 +228,21 @@
 
   /* ---------- entry requirements ---------- */
   .reqs-list{list-style:none;margin-top:22px;max-width:760px}
-  .reqs-list li{position:relative;padding:14px 0 14px 36px;border-top:1px solid var(--line);font-size:1rem;color:var(--body)}
-  .reqs-list li:last-child{border-bottom:1px solid var(--line)}
-  .reqs-list li::before{
+  .reqs-list > li{position:relative;padding:14px 0 14px 36px;border-top:1px solid var(--line);font-size:1rem;color:var(--body)}
+  .reqs-list > li:last-child{border-bottom:1px solid var(--line)}
+  .reqs-list > li::before{
     content:"";position:absolute;left:2px;top:20px;width:15px;height:8px;
     border-left:2.5px solid var(--red);border-bottom:2.5px solid var(--red);
     transform:rotate(-45deg);border-radius:1px;
   }
+  .cond-group{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+  .cond{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:.94rem;color:var(--ink);line-height:1.5}
+  .cond-or{
+    align-self:flex-start;font-family:var(--head);font-weight:700;font-size:.7rem;
+    letter-spacing:.08em;color:var(--red);padding:2px 10px;border-radius:100px;
+    background:rgba(160,35,55,.08);border:1px solid rgba(160,35,55,.3);
+  }
+  .cond-remark{margin-top:12px;font-size:.82rem;color:var(--muted);line-height:1.55}
   .reqs-note{
     margin-top:22px;max-width:760px;font-size:.9rem;color:var(--muted);
     background:var(--bg-soft);border:1px solid var(--line);border-left:3px solid var(--red);
@@ -693,12 +701,12 @@
     <ul class="reqs-list rv">
       <li>Preference will be given to applicants having at least 1 year of relevant work experience.</li>
       <li>If you are not a native speaker of English, and your Bachelor's degree or equivalent qualification is awarded by institutions where the medium of instruction is not English, you are expected to provide one of the following proficiency test results (taken in a single sitting within 2 years) to fulfil the University's minimum English language requirement for admission purposes:
-        <ul style="list-style:none;margin-top:10px;padding:0">
-          <li style="padding:4px 0">An overall score of 80 out of 120 / 4.5 out of 6 (for tests taken on or after 21 Jan 2026) or above in the Test of English as a Foreign Language (TOEFL) Internet-based test</li>
-          <li style="padding:4px 0;font-weight:700;color:var(--red)">OR</li>
-          <li style="padding:4px 0">An Overall Band score of 6.0 or above in the International English Language Testing System (IELTS) Academic module</li>
-        </ul>
-        <p style="margin-top:10px;font-size:.82rem;color:var(--muted)">Remarks: TOEFL iBT Home Edition, the IELTS Online, IELTS Indicator test, and IELTS One Skill Retake results will not be considered for meeting the English language requirement for taught programmes.</p>
+        <div class="cond-group">
+          <div class="cond">An overall score of 80 out of 120 / 4.5 out of 6 (for tests taken on or after 21 Jan 2026) or above in the Test of English as a Foreign Language (TOEFL) Internet-based test</div>
+          <span class="cond-or">OR</span>
+          <div class="cond">An Overall Band score of 6.0 or above in the International English Language Testing System (IELTS) Academic module</div>
+        </div>
+        <p class="cond-remark">Remarks: TOEFL iBT Home Edition, the IELTS Online, IELTS Indicator test, and IELTS One Skill Retake results will not be considered for meeting the English language requirement for taught programmes.</p>
       </li>
     </ul>
     <p class="reqs-note rv">Please refer to the <a href="https://www.polyu.edu.hk/study/pg/taught-postgraduate/admission-requirements-tpg" target="_blank" rel="noopener">Admission Requirements</a> section for details.</p>
