@@ -118,6 +118,7 @@
   background:color-mix(in srgb,var(--accent) 10%,#fff);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
 }
 .cond-remark{margin-top:12px;font-size:.82rem;color:var(--muted);line-height:1.55}
+.cond::before,.cond-or::before{content:none}
 
 .callout{
   background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px;
